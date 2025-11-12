@@ -25,6 +25,7 @@
     .bg-container{position:fixed;inset:0;z-index:0;overflow:hidden}
     .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;background:#000;}
 
+    /* ===== Header ===== */
     header{
       position:fixed;
       top:0; left:0; right:0;
@@ -33,49 +34,26 @@
       justify-content:space-between;
       flex-wrap:wrap; /* permite que el form baje de línea */
       gap:8px;
-      padding:10px 16px;
+      padding:12px 24px;
       z-index:5;
       background:transparent;
     }
-
     .logo{flex:0 0 auto}
-    .logo img{
-      position:static;
-      height:var(--brandHeight);
-      width:auto;
-      display:block;
-    }
+    .logo img{position:static;height:var(--brandHeight);width:auto;display:block}
 
-    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;flex:1 1 360px;justify-content:flex-end;}
-    .login-mini svg{width:20px;height:20px;fill:#fff;opacity:.9;margin-right:4px;}
-    .login-mini input{width:140px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem;outline:none}
+    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;flex:1 1 420px;justify-content:flex-end}
+    .login-mini svg{width:20px;height:20px;fill:#fff;opacity:.9;margin-right:4px}
+    .login-mini input{width:160px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem;outline:none}
     .login-mini input::placeholder{color:#cfcfcf}
     .login-mini button{padding:10px 14px;border-radius:12px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer}
 
-    @media (max-width:680px){
-      .login-mini input{width:110px}
-      header{gap:8px}
-      .login-mini{flex-basis:100%; margin-top:6px;} /* fuerza salto a segunda línea */
-    }
-      header{gap:8px}
-    }
-
-    @media (max-width:480px){
-      :root{--brandHeight:32px}
-      .login-mini input{width:100%}
-      .login-mini button{width:100%}
-    }
-      .login-mini{flex-basis:100%;justify-content:flex-end}
-      .login-mini input{width:100%}
-      .login-mini button{width:100%}
-    }
-
+    /* ===== Main ===== */
     main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:110px 1.5rem 0;z-index:2;position:relative}
 
     h1{font-size:clamp(36px,5vw,60px);line-height:1.1;font-weight:700;margin:0 0 1rem}
     h1 br{display:block}
     h1 .highlight{position:relative;color:var(--accent)}
-    h1 .highlight::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="10" viewBox="0 0 200 10"><path d="M2 8 C40 2,160 2,198 8" stroke="%2316e16f" stroke-width="4" fill="none" stroke-linecap="round"/></svg>') center/contain no-repeat;}
+    h1 .highlight::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="10" viewBox="0 0 200 10"><path d="M2 8 C40 2,160 2,198 8" stroke="%2316e16f" stroke-width="4" fill="none" stroke-linecap="round"/></svg>') center/contain no-repeat}
 
     .meta{margin-bottom:2rem;font-size:1.1rem;color:#e4fbe7;opacity:.9}
 
@@ -85,7 +63,7 @@
     button.cta{padding:14px 24px;border-radius:30px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer;transition:all .2s ease}
     button.cta:hover{transform:translateY(-2px)}
 
-    footer{position:absolute;bottom:20px;width:100%;text-align:center;font-size:.8rem;color:#cdeed3;opacity:.85;z-index:4;}
+    footer{position:absolute;bottom:20px;width:100%;text-align:center;font-size:.8rem;color:#cdeed3;opacity:.85;z-index:4}
 
     .modal{position:fixed;inset:0;z-index:10;display:none}
     .modal.active{display:block}
@@ -98,6 +76,18 @@
     .modal-body p{margin:0 0 6px}
     .modal-footer{display:flex;justify-content:flex-end;gap:10px;padding:0 16px 16px}
     .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);color:#fff;font-weight:600;cursor:pointer}
+
+    /* ===== Breakpoints ===== */
+    @media (max-width:900px){
+      .login-mini{flex-basis:100%}
+      main{padding-top:140px}
+    }
+    @media (max-width:540px){
+      :root{--brandHeight:32px}
+      .login-mini input{width:100%}
+      .login-mini button{width:100%}
+      main{padding-top:170px}
+    }
   </style>
 </head>
 <body>
@@ -124,8 +114,9 @@
     <h1>¿Sabes cuántas personas<br>pasan cada día frente a <span class="highlight">tu local</span>?</h1>
     <p class="meta">Analítica de tráfico peatonal aplicado a tu negocio</p>
 
-    <form class="hero" id="interesForm">
+    <form class="hero" id="interesForm" action="https://formspree.io/f/xxxxxxxx" method="POST">
       <input type="email" id="emailInput" name="email" placeholder="Email" required>
+      <input type="hidden" name="_subject" value="Interés en Ailítica" />
       <button class="cta" type="submit">Estoy Interesado</button>
     </form>
   </main>
@@ -179,37 +170,10 @@
       if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 
-    // Enviar a un servicio externo (Formspree) sin abrir el correo del usuario
-    const FORMSPREE_URL = 'https://formspree.io/f/xxxxxxxx'; // <-- reemplaza por tu endpoint
-    document.getElementById('interesForm').addEventListener('submit', async function(e){
-      e.preventDefault();
-      const email = document.getElementById('emailInput').value.trim();
-      if(!email) return;
-      const btn = this.querySelector('button.cta');
-      const prev = btn.textContent;
-      btn.disabled = true; btn.textContent = 'Enviando...';
-      try{
-        const res = await fetch(FORMSPREE_URL, {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify({ email })
-        });
-        if(res.ok){
-          btn.textContent = '¡Gracias!';
-          this.reset();
-        }else{
-          btn.textContent = 'Inténtalo de nuevo';
-        }
-      }catch(err){
-        btn.textContent = 'Error, reintenta';
-      }finally{
-        setTimeout(()=>{ btn.disabled=false; btn.textContent=prev; }, 2200);
-      }
-    });
-
-    // Asegurar que el video se reinicia y reproduce
+        // Asegurar que el video se reinicia y reproduce
     const bgvideo=document.getElementById('bgvideo');
     bgvideo.addEventListener('canplay',()=>{bgvideo.play();});
   </script>
 </body>
 </html>
+
