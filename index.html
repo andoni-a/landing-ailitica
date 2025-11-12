@@ -179,13 +179,32 @@
       if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 
-    // Abrir correo al enviar el formulario de interés
-    document.getElementById('interesForm').addEventListener('submit', function(e){
+    // Enviar a un servicio externo (Formspree) sin abrir el correo del usuario
+    const FORMSPREE_URL = 'https://formspree.io/f/xxxxxxxx'; // <-- reemplaza por tu endpoint
+    document.getElementById('interesForm').addEventListener('submit', async function(e){
       e.preventDefault();
-      const email = document.getElementById('emailInput').value;
-      const subject = encodeURIComponent('Interés en Ailítica');
-      const body = encodeURIComponent(`Hola, me gustaría recibir más información.\n\nEmail de contacto: ${email}`);
-      window.location.href = `mailto:hola@ailitica.com?subject=${subject}&body=${body}`;
+      const email = document.getElementById('emailInput').value.trim();
+      if(!email) return;
+      const btn = this.querySelector('button.cta');
+      const prev = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Enviando...';
+      try{
+        const res = await fetch(FORMSPREE_URL, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({ email })
+        });
+        if(res.ok){
+          btn.textContent = '¡Gracias!';
+          this.reset();
+        }else{
+          btn.textContent = 'Inténtalo de nuevo';
+        }
+      }catch(err){
+        btn.textContent = 'Error, reintenta';
+      }finally{
+        setTimeout(()=>{ btn.disabled=false; btn.textContent=prev; }, 2200);
+      }
     });
 
     // Asegurar que el video se reinicia y reproduce
