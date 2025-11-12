@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ailítica — Tecnología ética para entender la afluencia peatonal</title>
+  <meta name="description" content="¿Sabes cuántas personas pasan cada día frente a tu local? Privacidad por diseño · Edge AI · Tecnología ética." />
+  <meta property="og:title" content="Ailítica — Tecnología ética para entender la afluencia peatonal" />
+  <meta property="og:description" content="¿Sabes cuántas personas pasan cada día frente a tu local? Privacidad por diseño · Edge AI · Tecnología ética." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0EE86B" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    :root{
+      --accent:#16e16f;
+      --ink:#0A0A0A;
+      --paper:#FFFFFF;
+      --video-overlay:rgba(0,0,0,0.4);
+      --brandHeight:40px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
+    a{color:inherit;text-decoration:none}
+
+    .bg-container{position:fixed;inset:0;z-index:0;overflow:hidden}
+    .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;background:#000;}
+    /* overlay eliminado temporalmente para descartar conflictos */
+    .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 120% at 50% 20%, rgba(0,0,0,.1) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.85) 100%)}
+
+    header{position:absolute;top:0;left:32px;right:32px;height:64px;display:flex;align-items:center;justify-content:flex-end;font-weight:700;font-size:1.1rem;letter-spacing:1px;text-transform:uppercase;opacity:.95;padding-top:max(0px, env(safe-area-inset-top));z-index:5;}
+    .logo img{position:fixed;top:16px;left:32px;height:var(--brandHeight);max-height:64px;width:auto;display:block;z-index:5;image-rendering:auto}
+
+    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;}
+    .login-mini svg{width:20px;height:20px;fill:#fff;opacity:.9;margin-right:4px;}
+    .login-mini input{width:140px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem;outline:none}
+    .login-mini input::placeholder{color:#cfcfcf}
+    .login-mini button{padding:10px 14px;border-radius:12px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer}
+
+    @media (max-width:680px){
+      .login-mini input{width:110px}
+      header{gap:8px}
+    }
+
+    @media (max-width:420px){
+      .login-mini{flex-wrap:wrap;justify-content:flex-end}
+      .login-mini input{width:100%}
+      .login-mini button{width:100%}
+      :root{--brandHeight:32px}
+      .logo img{top:10px}
+    }
+
+    @media (max-width:540px){
+      footer{position:static;padding:20px 0}
+      main{padding-bottom:28px}
+    }
+
+    main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 1.5rem;z-index:2;position:relative}
+
+    h1{font-size:clamp(36px,5vw,60px);line-height:1.1;font-weight:700;margin:0 0 1rem}
+    h1 br{display:block}
+    h1 .highlight{position:relative;color:var(--accent)}
+    h1 .highlight::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="10" viewBox="0 0 200 10"><path d="M2 8 C40 2,160 2,198 8" stroke="%2316e16f" stroke-width="4" fill="none" stroke-linecap="round"/></svg>') center/contain no-repeat;}
+
+    .meta{margin-bottom:2rem;font-size:1.1rem;color:#e4fbe7;opacity:.9}
+
+    form.hero{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:480px;width:100%}
+    input[type=email]{flex:1;min-width:220px;padding:14px 18px;border-radius:30px;border:none;font-size:1rem;outline:none;background:rgba(255,255,255,.1);color:#fff}
+    input::placeholder{color:#ccc}
+    button.cta{padding:14px 24px;border-radius:30px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer;transition:all .2s ease}
+    button.cta:hover{transform:translateY(-2px)}
+
+    footer{position:absolute;bottom:20px;width:100%;text-align:center;font-size:.8rem;color:#cdeed3;opacity:.85;z-index:4;}
+
+    .modal{position:fixed;inset:0;z-index:10;display:none}
+    .modal.active{display:block}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(1px)}
+    .modal-dialog{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,520px);background:linear-gradient(180deg,rgba(20,20,20,.95),rgba(12,12,12,.95));border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .modal-title{font-weight:700}
+    .modal-close{appearance:none;border:0;background:transparent;color:#fff;font-size:20px;line-height:1;cursor:pointer;opacity:.9}
+    .modal-body{padding:18px 16px;color:#eafbea;opacity:.95}
+    .modal-body p{margin:0 0 6px}
+    .modal-footer{display:flex;justify-content:flex-end;gap:10px;padding:0 16px 16px}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);color:#fff;font-weight:600;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="bg-container">
+    <video class="bg-video" autoplay muted loop playsinline preload="auto" id="bgvideo">
+      <source src="video.mp4" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+    <!-- overlay eliminado -->
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="Ailitica.png" alt="Logo Ailítica" />
+    </div>
+    <form class="login-mini" id="loginMini" action="#" aria-label="Acceso">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+      <input type="text" name="usuario" placeholder="Usuario" autocomplete="username" aria-label="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" autocomplete="current-password" aria-label="Contraseña" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </header>
+
+  <main>
+    <h1>¿Sabes cuántas personas<br>pasan cada día frente a <span class="highlight">tu local</span>?</h1>
+    <p class="meta">Analitica de trafico peatonal aplicado a tu negocio</p>
+
+    <form class="hero" action="mailto:hola@ailitica.com" method="post" enctype="text/plain">
+      <input type="email" name="email" placeholder="Email" required>
+      <button class="cta" type="submit">Estoy Interesado</button>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 Ailítica. Todos los derechos reservados. · Aviso de privacidad en <a href="mailto:hola@ailitica.com">hola@ailitica.com</a>
+  </footer>
+
+  <div id="alertModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Aviso</div>
+        <button class="modal-close" type="button" aria-label="Cerrar" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Usuario o contraseña incorrecta.</strong></p>
+        <p>Por favor, ponte en contacto con nosotros en <a href="mailto:hola@ailitica.com">hola@ailitica.com</a></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" type="button" data-close>Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginMini');
+    const modal = document.getElementById('alertModal');
+
+    function openModal(){
+      modal.classList.add('active');
+      modal.removeAttribute('aria-hidden');
+      const closeBtn = modal.querySelector('.modal-close');
+      closeBtn && closeBtn.focus();
+    }
+    function closeModal(){
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    loginForm.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      openModal();
+    });
+
+    modal.addEventListener('click', (e)=>{
+      if(e.target.hasAttribute('data-close')) closeModal();
+    });
+
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    // Asegurar que el video se reinicia y reproduce
+    const bgvideo=document.getElementById('bgvideo');
+    bgvideo.addEventListener('canplay',()=>{bgvideo.play();});
+  </script>
+</body>
+</html>
+
