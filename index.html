@@ -31,13 +31,14 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      flex-wrap:wrap;
+      flex-wrap:wrap; /* permite que el form baje de línea */
       gap:8px;
-      padding:12px 24px;
+      padding:10px 16px;
       z-index:5;
       background:transparent;
     }
 
+    .logo{flex:0 0 auto}
     .logo img{
       position:static;
       height:var(--brandHeight);
@@ -45,7 +46,7 @@
       display:block;
     }
 
-    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;flex-wrap:wrap;justify-content:flex-end;}
+    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;flex:1 1 360px;justify-content:flex-end;}
     .login-mini svg{width:20px;height:20px;fill:#fff;opacity:.9;margin-right:4px;}
     .login-mini input{width:140px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem;outline:none}
     .login-mini input::placeholder{color:#cfcfcf}
@@ -54,16 +55,22 @@
     @media (max-width:680px){
       .login-mini input{width:110px}
       header{gap:8px}
+      .login-mini{flex-basis:100%; margin-top:6px;} /* fuerza salto a segunda línea */
+    }
+      header{gap:8px}
     }
 
     @media (max-width:480px){
       :root{--brandHeight:32px}
+      .login-mini input{width:100%}
+      .login-mini button{width:100%}
+    }
       .login-mini{flex-basis:100%;justify-content:flex-end}
       .login-mini input{width:100%}
       .login-mini button{width:100%}
     }
 
-    main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 1.5rem 0;z-index:2;position:relative}
+    main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:110px 1.5rem 0;z-index:2;position:relative}
 
     h1{font-size:clamp(36px,5vw,60px);line-height:1.1;font-weight:700;margin:0 0 1rem}
     h1 br{display:block}
@@ -187,6 +194,3 @@
   </script>
 </body>
 </html>
-
-
-
