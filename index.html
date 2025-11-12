@@ -24,13 +24,28 @@
 
     .bg-container{position:fixed;inset:0;z-index:0;overflow:hidden}
     .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;background:#000;}
-    /* overlay eliminado temporalmente para descartar conflictos */
-    .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 120% at 50% 20%, rgba(0,0,0,.1) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.85) 100%)}
 
-    header{position:absolute;top:0;left:32px;right:32px;height:64px;display:flex;align-items:center;justify-content:flex-end;font-weight:700;font-size:1.1rem;letter-spacing:1px;text-transform:uppercase;opacity:.95;padding-top:max(0px, env(safe-area-inset-top));z-index:5;}
-    .logo img{position:fixed;top:16px;left:32px;height:var(--brandHeight);max-height:64px;width:auto;display:block;z-index:5;image-rendering:auto}
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:8px;
+      padding:12px 24px;
+      z-index:5;
+      background:transparent;
+    }
 
-    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;}
+    .logo img{
+      position:static;
+      height:var(--brandHeight);
+      width:auto;
+      display:block;
+    }
+
+    .login-mini{display:flex;align-items:center;gap:8px;font-weight:600;text-transform:none;flex-wrap:wrap;justify-content:flex-end;}
     .login-mini svg{width:20px;height:20px;fill:#fff;opacity:.9;margin-right:4px;}
     .login-mini input{width:140px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem;outline:none}
     .login-mini input::placeholder{color:#cfcfcf}
@@ -41,20 +56,14 @@
       header{gap:8px}
     }
 
-    @media (max-width:420px){
-      .login-mini{flex-wrap:wrap;justify-content:flex-end}
+    @media (max-width:480px){
+      :root{--brandHeight:32px}
+      .login-mini{flex-basis:100%;justify-content:flex-end}
       .login-mini input{width:100%}
       .login-mini button{width:100%}
-      :root{--brandHeight:32px}
-      .logo img{top:10px}
     }
 
-    @media (max-width:540px){
-      footer{position:static;padding:20px 0}
-      main{padding-bottom:28px}
-    }
-
-    main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 1.5rem;z-index:2;position:relative}
+    main{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 1.5rem 0;z-index:2;position:relative}
 
     h1{font-size:clamp(36px,5vw,60px);line-height:1.1;font-weight:700;margin:0 0 1rem}
     h1 br{display:block}
@@ -90,7 +99,6 @@
       <source src="video.mp4" type="video/mp4" />
       Tu navegador no soporta video HTML5.
     </video>
-    <!-- overlay eliminado -->
   </div>
 
   <header>
@@ -107,10 +115,10 @@
 
   <main>
     <h1>¿Sabes cuántas personas<br>pasan cada día frente a <span class="highlight">tu local</span>?</h1>
-    <p class="meta">Analitica de trafico peatonal aplicado a tu negocio</p>
+    <p class="meta">Analítica de tráfico peatonal aplicado a tu negocio</p>
 
-    <form class="hero" action="mailto:hola@ailitica.com" method="post" enctype="text/plain">
-      <input type="email" name="email" placeholder="Email" required>
+    <form class="hero" id="interesForm">
+      <input type="email" id="emailInput" name="email" placeholder="Email" required>
       <button class="cta" type="submit">Estoy Interesado</button>
     </form>
   </main>
@@ -164,11 +172,21 @@
       if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 
+    // Abrir correo al enviar el formulario de interés
+    document.getElementById('interesForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      const subject = encodeURIComponent('Interés en Ailítica');
+      const body = encodeURIComponent(`Hola, me gustaría recibir más información.\n\nEmail de contacto: ${email}`);
+      window.location.href = `mailto:hola@ailitica.com?subject=${subject}&body=${body}`;
+    });
+
     // Asegurar que el video se reinicia y reproduce
     const bgvideo=document.getElementById('bgvideo');
     bgvideo.addEventListener('canplay',()=>{bgvideo.play();});
   </script>
 </body>
 </html>
+
 
 
