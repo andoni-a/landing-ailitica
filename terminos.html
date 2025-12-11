@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Términos y condiciones – Ailítica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    :root {
+      --accent-blue: #00bbff;
+      --text-gray:  #2d3034;
+      --heading-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      --body-size:    1.2rem;
+    }
+
+    body {
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-gray);
+      background: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* ===== Mismo header que en index ===== */
+
+    /* Franja fija bajo el logo */
+    #logoBand {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100px;
+      background: #e0e0e0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Icono esquina izquierda */
+    #icon {
+      position: fixed;
+      top: 1.5rem;
+      left: 2rem;
+      z-index: 3;
+      height:45px;
+      pointer-events: none;
+    }
+
+    /* Enlace VOLVER esquina derecha */
+    #contactLink {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 3;
+      font-size: 1rem;
+      color: #3a3a3a;
+      text-decoration: none;
+      font-weight: 600;
+      opacity: 1; /* siempre visible en esta página */
+      cursor: pointer;
+    }
+
+    #contactLink:hover {
+      color: var(--accent-blue);
+    }
+
+    /* LOGO: mismas reglas que en index */
+    #logo {
+      position: fixed;
+      z-index: 3;
+      width: clamp(220px, 40vw, 420px);
+      height: auto;
+      transform-origin: center center;
+      transition:
+        top 0.6s ease,
+        left 0.6s ease,
+        transform 0.6s ease;
+      pointer-events: none;
+    }
+
+    #logo.logo--center {
+      top: 33%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.7);
+    }
+
+    #logo.logo--top {
+      top: 1.5rem;
+      left: 50%;
+      transform: translate(-50%, 0) scale(1);
+    }
+
+    /* ===== Contenido legal ===== */
+
+    main {
+      width: 100%;
+      padding: 160px 6vw 80px; /* espacio para header + logo */
+    }
+
+    .legal-content {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: var(--body-size);
+      line-height: 1.8;
+    }
+
+    .legal-content h1 {
+      font-size: var(--heading-size);
+      color: var(--accent-blue);
+      margin-bottom: 1.4rem;
+      font-weight: 600;
+    }
+
+    .legal-content h2 {
+      font-size: 1.3rem;
+      margin-top: 1.8rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .legal-content p,
+    .legal-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .legal-content ul,
+    .legal-content ol {
+      padding-left: 1.5rem;
+    }
+
+    .legal-content a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .legal-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Footer igual que index ===== */
+
+    .site-footer {
+      background: #3a3a3a;
+      color: #f9fafb;
+      padding: 1.2rem 3vw;
+      margin-top: 2rem;
+    }
+
+    .site-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .footer-link {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Versión móvil: mismas reglas que en index ===== */
+    @media (max-width: 768px) {
+
+      :root {
+        --heading-size: 2rem;
+        --body-size: 1rem;
+      }
+
+      #icon {
+        height: 22px;
+        top: 1.5rem;
+        left: 1.5rem;
+      }
+
+      #contactLink {
+        top: 2rem;
+        right: 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      #logoBand {
+        height: 70px;
+      }
+
+      #logo {
+        width: clamp(180px, 65vw, 320px);
+      }
+
+      #logo.logo--center {
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      #logo.logo--top {
+        top: 1.5rem;
+        left: 46%;
+        transform: translate(-50%, 0) scale(0.7);
+      }
+
+      main {
+        padding: 120px 6vw 60px; /* un poco menos de margen bajo en móvil */
+      }
+
+      .legal-content {
+        font-size: 1rem;
+      }
+
+      .site-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-right {
+        gap: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header igual que en index -->
+  <div id="logoBand"></div>
+  <img id="icon" src="icon.png" alt="Icono Ailitica" />
+  <a id="contactLink" href="index.html">VOLVER</a>
+  <!-- OJO: dejamos el logo en modo "top", igual que cuando en index ya ha subido -->
+  <img id="logo" class="logo--top" src="ailitica.png" alt="Ailitica" />
+
+  <main>
+    <article class="legal-content">
+
+      <h1>Términos y condiciones</h1>
+
+      <!-- TU TEXTO LEGAL AQUÍ -->
+      <p>[Sustituye este texto por tus términos y condiciones reales.]</p>
+
+      <h2>1. Objeto</h2>
+      <p>…</p>
+
+      <h2>2. Condiciones de uso</h2>
+      <p>…</p>
+
+      <h2>3. Responsabilidad</h2>
+      <p>…</p>
+
+      <h2>4. Protección de datos</h2>
+      <p>…</p>
+
+      <h2>5. Legislación aplicable</h2>
+      <p>…</p>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-left">
+        Copyright © 2025 Ailítica S.L..
+      </div>
+      <div class="footer-right">
+        <a href="terminos.html" class="footer-link">Términos y condiciones</a>
+        <a href="cookies.html" class="footer-link">Política de cookies</a>
+        <a href="privacidad.html" class="footer-link">Política de privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
