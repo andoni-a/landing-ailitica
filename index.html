@@ -7,11 +7,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
+
     gtag('config', 'G-PWNT3YC598');
   </script>
   <meta charset="UTF-8" />
-  <title>AILITICA – el dato al servicio del valor</title>
+  <title>Ailitica – Demo scroll ligado al vídeo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts: Montserrat -->
@@ -62,6 +62,8 @@
       background: #e0e0e0;
       z-index: 2;
       pointer-events: none;
+      opacity: 0;                     /* OCULTA AL INICIO */
+      transition: opacity 0.4s ease;  /* SUAVE AL APARECER */
     }
 
     /* ===================== VIDEO ====================== */
@@ -188,6 +190,38 @@
       opacity: 0.5;
     }
 
+    /* BARRA LATERAL DE PROGRESO */
+    .scroll-progress {
+      position: fixed;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 6;              /* por encima del vídeo (que tiene 5 en móvil) */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-progress-track {
+      position: relative;
+      width: 4px;
+      height: 45vh;
+      background: #5a5d64;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .scroll-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--accent-blue);
+      border-radius: 999px;
+      transition: height 0.12s ease-out;
+    }
+
     /* PANELS GENERALES */
     main {
       position: relative;
@@ -208,7 +242,7 @@
       max-width: 38rem;
       padding: 0 0rem;
       margin-left: 5vw;
-      transform: translateY(20px);
+      transform: translateY(120px);
       opacity: 0.7;
       text-align: left;
       transition: opacity 0.7s ease, transform 0.7s ease;
@@ -320,6 +354,17 @@
       line-height: 1.4;
     }
 
+    /* Enlace dentro del label de términos */
+    .form-checkbox-label a {
+      color: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .form-checkbox-label a:hover {
+      opacity: 0.8;
+    }
+
     .form-submit {
       margin-top: 1.5rem;
       padding: 0.9rem 1.8rem;
@@ -341,6 +386,22 @@
       margin-top: 1.5rem;
       font-size: 0.8rem;
       color: var(--text-gray);
+    }
+
+    /* BLOQUE INFORMACIÓN BÁSICA */
+    .form-dataprotection {
+      margin-top: 0.5rem;
+    }
+
+    .form-dataprotection a {
+      color: var(--text-gray);
+      font-size: 0.8rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .form-dataprotection a:hover {
+      opacity: 0.85;
     }
 
     /* ÉXITO FORMULARIO */
@@ -374,7 +435,7 @@
     .site-footer {
       background: #3a3a3a;
       color: #f9fafb;
-      padding: 1.2rem 3vw;
+      padding: 1.8rem 3vw 2.2rem;
       margin-top: 2rem;
     }
 
@@ -382,26 +443,117 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
       font-size: 0.9rem;
     }
 
-    .footer-right {
+    /* Columna izquierda: iconos sociales */
+    .footer-social {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
+      gap: 1rem;
+      align-items: center;
     }
 
-    .footer-link {
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-social img {
+      height: 20px;
+      width: 20px;
+      opacity: 0.5;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-social img:hover {
+      opacity: 0.9;
+    }
+
+    /* Columna derecha: copyright + enlaces */
+    .footer-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.6rem;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
       color: #e5e7eb;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
-    .footer-link:hover {
+    .footer-links a:hover {
       text-decoration: underline;
+    }
+
+    /* POPUP INFORMACIÓN BÁSICA */
+    #dp-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #dp-popup {
+      background: #f5f6f7;
+      color: #2d3034;
+      max-width: 650px;
+      width: 90%;
+      padding: 2rem 2rem 3rem;
+      border-radius: 12px;
+      position: relative;
+      line-height: 1.6;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    #dp-popup h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-gray);
+    }
+
+    #dp-popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    #dp-popup button {
+      margin-top: 2rem;
+      padding: 0.7rem 1.6rem;
+      background: #3a3a3a;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
     /* vídeo oculto en el último panel SOLO en móvil */
@@ -462,7 +614,7 @@
 
       #logo.logo--top {
         top: 1.5rem;
-        left: 46%;
+        left: 40%;
         transform: translate(-50%, 0) scale(0.7);
       }
 
@@ -475,6 +627,16 @@
       #scrollLottie {
         bottom: 1rem;
         width: 120px;
+      }
+
+      .scroll-progress {
+        top: 70px;              /* justo debajo de la banda superior */
+        transform: none;        /* eliminamos el centrado */
+        left: 0.8rem;           
+      }
+
+      .scroll-progress-track {
+        height: 35vh;
       }
 
       .panel {
@@ -502,13 +664,21 @@
         max-width: 100%;
       }
 
+      /* Footer móvil: iconos arriba, luego copyright, luego enlaces en columna */
       .site-footer-inner {
         flex-direction: column;
         align-items: flex-start;
+        gap: 1.2rem;
       }
 
-      .footer-right {
-        gap: 0.6rem;
+      .footer-text {
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
       }
     }
   </style>
@@ -521,7 +691,7 @@
   <img id="icon" src="icon.png" alt="Icono Ailitica" />
 
   <!-- ENLACE CONTACTO -->
-  <a id="contactLink" href="#contacto">CONTACTO</a>
+  <a id="contactLink" href="#contacto">CONTÁCTANOS</a>
 
   <img id="logo" class="logo--center" src="ailitica.png" alt="Ailitica" />
 
@@ -531,6 +701,13 @@
   <div id="scrollLottie">
     <div class="scroll-label">SCROLL</div>
     <img src="scroll.gif" alt="Scroll animation" class="scroll-gif" />
+  </div>
+
+  <!-- Barra lateral de progreso -->
+  <div id="scrollProgress" class="scroll-progress">
+    <div class="scroll-progress-track">
+      <div class="scroll-progress-fill"></div>
+    </div>
   </div>
 
   <!-- Vídeo -->
@@ -549,7 +726,7 @@
         <h2>TU LOCAL TIENE UN VALOR QUE MERECE SER DEMOSTRADO</h2>
         <p>
           La actividad de la calle refleja el atractivo real de tu ubicación.
-          Nosotros la medimos y la convertimos en un indicador objetivo que respalda tu posición al vender, alquilar o negociar tu local.
+          Nosotros la medimos y la convertimos en un indicador objetivo que respalda tu posición al vender, alquilar o traspasar tu local.
         </p>
       </div>
     </section>
@@ -557,7 +734,7 @@
     <!-- PANEL 2 -->
     <section class="panel" data-start="3.63" data-end="8.75">
       <div class="panel-inner">
-        <h2>VISIBILIZAMOS LO QUE CONVIERTE TU UBICACION EN UNICA</h2>
+        <h2>VISIBILIZAMOS EL POTENCIAL REAL DE TU UBICACIÓN</h2>
         <p>
           Mostramos el interés que genera tu local con una lectura objetiva.
           Aportamos contexto para comprender su verdadero alcance comercial.
@@ -569,7 +746,7 @@
     <!-- PANEL 3 -->
     <section class="panel" data-start="8.75" data-end="13.72">
       <div class="panel-inner">
-        <h2>ORDENAMOS LA ACTIVIDAD URBANA PARA QUE ENTIENDAS SU IMPACTO</h2>
+        <h2>ORDENAMOS LA ACTIVIDAD URBANA PARA REVELAR SU IMPACTO</h2>
         <p>
           La actividad de la calle es dinámica y difícil de interpretar a simple vista.
           Identificamos patrones y tendencias que muestran el atractivo auténtico de tu local.
@@ -582,9 +759,8 @@
       <div class="panel-inner">
         <h2>CONFIANZA, TRANSPARENCIA Y RIGOR</h2>
         <p>
-          Actuamos con un enfoque equilibrado para propietarios y compradores.
+          Un sistema diseñado para proteger la privacidad y generar confianza en cada fase.
           Proporcionamos información clara, anónima y plenamente fiable.
-          Una base segura y respetuosa que refuerza la confianza en todo el proceso
         </p>
       </div>
     </section>
@@ -605,8 +781,8 @@
     <section class="panel" id="contacto" data-start="23.0" data-end="24.8">
       <div class="panel-inner panel-inner--cta">
         <div class="form-wrapper">
-          <h2 class="cta-title">Quiero conocer el valor real de mi local</h2>
-          <p class="cta-subtitle">Déjanos tus datos y te mostraremos el potencial comercial de tu ubicación</p>
+          <h2 class="cta-title">Demostrar el valor de tu local importa</h2>
+          <p class="cta-subtitle">Escríbenos para ayudarte a hacerlo visible con datos reales.</p>
 
           <!-- FORMULARIO FORMSpree -->
           <!-- IMPORTANTE: cambia TU_FORM_ID por el ID real de tu formulario en Formspree -->
@@ -665,7 +841,7 @@
                 required
               />
               <label class="form-checkbox-label" for="acepto-terminos">
-                Acepto los términos y condiciones.
+                Acepto los <a href="terminos.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a>.
               </label>
             </div>
 
@@ -683,10 +859,14 @@
               </label>
             </div>
 
-            <button class="form-submit" type="submit">
-              Solicitar estudio de mi local
-            </button>
+            <!-- Información básica de protección de datos -->
+            <div class="form-dataprotection">
+              <a href="#" id="open-dp-popup">Información básica de protección de datos</a>
+            </div>
 
+            <button class="form-submit" type="submit">
+              Contáctanos
+            </button>
 
           </form>
 
@@ -715,16 +895,56 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <div class="footer-left">
-        Copyright © 2025 Ailítica S.L.
+      <!-- Iconos sociales izquierda -->
+      <div class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <img src="ig_logo.png" alt="Instagram">
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <img src="in_logo.png" alt="LinkedIn">
+        </a>
+        <a href="https://x.com/ailitica" target="_blank" rel="noopener noreferrer">
+          <img src="x_logo.png" alt="X">
+        </a>
       </div>
-      <div class="footer-right">
-        <a href="terminos.html" class="footer-link">Términos y condiciones</a>
-        <a href="cookies.html" class="footer-link">Política de cookies</a>
-        <a href="privacidad.html" class="footer-link">Política de privacidad</a>
+
+      <!-- Texto derecha -->
+      <div class="footer-text">
+        <div class="footer-copy">
+          Copyright © 2025 Ailítica S.L.
+        </div>
+        <div class="footer-links">
+          <a href="terminos.html">Términos y condiciones</a>
+          <a href="cookies.html">Política de cookies</a>
+          <a href="privacidad.html">Política de privacidad</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- POPUP INFORMACIÓN BÁSICA -->
+  <div id="dp-popup-overlay">
+    <div id="dp-popup">
+      <div id="dp-popup-close">✕</div>
+
+      <h3>Información básica de protección de datos</h3>
+
+      <p>
+        El responsable del tratamiento es <strong>Ailitica S.L.</strong>.
+        La legitimación del tratamiento es tu consentimiento y su finalidad es ponernos en contacto contigo
+        para atender tus consultas. En caso de que también aceptes el envío de novedades,
+        su fin será el envío de correos electrónicos informativos o comerciales.
+      </p>
+
+      <p>
+        Los datos proporcionados solo se cederán a terceros en caso de obligación legal o que sea necesario
+        para prestar los servicios que solicitas. Puedes ejercer tus derechos de acceso, rectificación
+        o supresión, entre otros, tal y como se detalla en la Política de Privacidad.
+      </p>
+
+      <button id="dp-popup-ok">Entendido</button>
+    </div>
+  </div>
 
   <script>
     const video        = document.getElementById('bgVideo');
@@ -734,10 +954,14 @@
     const scrollLottie = document.getElementById('scrollLottie');
     const contactLink  = document.getElementById('contactLink');
 
+    const scrollProgress      = document.getElementById('scrollProgress');
+    const scrollProgressFill  = document.querySelector('.scroll-progress-fill');
+
     let videoReady     = false;
     let introDone      = false;
     let activeIndex    = 0;
     let currentSegment = null;
+    
 
     const INTRO_END_TIME_SEC  = 1.1;
     const INTRO_END_DELAY_MS  = 1100;
@@ -794,6 +1018,7 @@
         logo.classList.remove('logo--top');
         logo.classList.add('logo--center');
         tagline.classList.remove('tagline--hidden');
+        document.getElementById('logoBand').style.opacity = '0';
 
         currentSegment = null;
         video.pause();
@@ -802,6 +1027,7 @@
         logo.classList.remove('logo--center');
         logo.classList.add('logo--top');
         tagline.classList.add('tagline--hidden');
+        document.getElementById('logoBand').style.opacity = '1';
 
         const start = parseFloat(panels[index].dataset.start);
         const end   = parseFloat(panels[index].dataset.end);
@@ -828,6 +1054,54 @@
         scrollLottie.classList.remove('scroll-hidden');
       }
     }
+    
+    function updateScrollProgress() {
+      if (!introDone) return;
+
+      const firstPanel = panels[1]; // panel 1 (después de la intro)
+      const lastPanel  = panels[panels.length - 1]; // CTA
+
+      if (!firstPanel || !lastPanel) return;
+
+      const scrollY        = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      // ----- INICIO DEL RECORRIDO -----
+      // Antes lo poníamos EXACTAMENTE en firstPanel.offsetTop.
+      // Ahora adelantamos un poco el inicio (30% de la altura de la ventana),
+      // para que la barra empiece a aparecer antes de que el texto esté tan arriba.
+      const startRaw    = firstPanel.offsetTop;
+      const startScroll = Math.max(startRaw - viewportHeight * 0.3, 0);
+
+      // ----- FINAL DEL RECORRIDO -----
+      const lastBottom = lastPanel.offsetTop + lastPanel.offsetHeight;
+      const endScroll  = lastBottom - viewportHeight;
+
+      // Si todavía estás por debajo del final de la intro -> barra oculta
+      if (scrollY <= startScroll) {
+        scrollProgress.style.opacity = '0';
+        scrollProgressFill.style.height = '0%';
+        return;
+      }
+
+      // A partir de aquí, barra visible
+      scrollProgress.style.opacity = '1';
+
+      // Seguridad por si endScroll <= startScroll (casos extremos)
+      if (endScroll <= startScroll) {
+        scrollProgressFill.style.height = '100%';
+        return;
+      }
+
+      // Clamp del scroll para que el porcentaje vaya de 0 a 100%
+      const clamped  = Math.min(Math.max(scrollY, startScroll), endScroll);
+      const progress = (clamped - startScroll) / (endScroll - startScroll);
+      const percent  = progress * 100;
+
+      scrollProgressFill.style.height = percent + '%';
+    }
+
+
 
     window.addEventListener('scroll', () => {
       if (!introDone) return;
@@ -851,6 +1125,13 @@
       }
 
       setActivePanel(nearestIndex);
+      updateScrollProgress();
+    });
+
+    window.addEventListener('resize', () => {
+      if (introDone) {
+        updateScrollProgress();
+      }
     });
 
     /* ================= FORMULARIO FORMspree AJAX ================= */
@@ -882,7 +1163,6 @@
           });
 
           if (response.ok) {
-            // Éxito: ocultamos formulario y cabecera, mostramos mensaje
             contactForm.reset();
             contactForm.classList.add('hidden');
             if (ctaTitle) ctaTitle.style.display = 'none';
@@ -920,12 +1200,39 @@
         }
       });
     }
+
+    /* ================= POPUP INFORMACIÓN BÁSICA ================= */
+    const dpOpen  = document.getElementById('open-dp-popup');
+    const dpLayer = document.getElementById('dp-popup-overlay');
+    const dpClose = document.getElementById('dp-popup-close');
+    const dpOk    = document.getElementById('dp-popup-ok');
+
+    function openDP() {
+      if (dpLayer) {
+        dpLayer.style.display = "flex";
+      }
+    }
+
+    function closeDP() {
+      if (dpLayer) {
+        dpLayer.style.display = "none";
+      }
+    }
+
+    if (dpOpen && dpLayer && dpClose && dpOk) {
+      dpOpen.addEventListener('click', (e) => {
+        e.preventDefault();
+        openDP();
+      });
+
+      dpClose.addEventListener('click', closeDP);
+      dpOk.addEventListener('click', closeDP);
+
+      dpLayer.addEventListener('click', (e) => {
+        if (e.target === dpLayer) closeDP();
+      });
+    }
   </script>
 
 </body>
 </html>
-
-
-
-
-
