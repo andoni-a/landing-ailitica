@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWNT3YC598"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <!-- Google Analytics 4 BLOQUEADO hasta consentimiento -->
+  <script type="text/plain"
+          data-cookiecategory="analytics"
+          src="https://www.googletagmanager.com/gtag/js?id=G-PWNT3YC598"></script>
 
+  <script type="text/plain" data-cookiecategory="analytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
     gtag('config', 'G-PWNT3YC598');
   </script>
+
+  <!-- Función para activar las cookies analíticas CUANDO EL USUARIO ACEPTE -->
+  <script>
+    function activarCookiesAnaliticas() {
+      const scripts = document.querySelectorAll("script[data-cookiecategory='analytics']");
+      scripts.forEach(s => {
+        const nuevoScript = document.createElement("script");
+
+        const src = s.getAttribute("src");
+        if (src) {
+          nuevoScript.src = src;
+          nuevoScript.async = true;
+        } else {
+          nuevoScript.text = s.innerHTML;
+        }
+
+        document.body.appendChild(nuevoScript);
+      });
+    }
+  </script>
+
   <meta charset="UTF-8" />
   <title>Ailitica – Demo scroll ligado al vídeo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -690,6 +713,53 @@
 
   <img id="icon" src="icon.png" alt="Icono Ailitica" />
 
+  <!-- BANNER DE COOKIES -->
+  <div id="cookie-banner" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.5rem;
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+    display: none;
+    z-index: 9999;
+  ">
+    <div style="max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+      <div style="flex: 1 1 240px; min-width: 220px;">
+        <strong>Uso de cookies</strong><br>
+        Este sitio utiliza cookies analíticas para mejorar tu experiencia y obtener estadísticas de uso.
+        No instalaremos cookies no esenciales sin tu consentimiento.
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
+        <button type="button" onclick="rechazarCookies()" style="
+          padding: 0.4rem 0.8rem;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          background: #444;
+          color: #fff;
+          cursor: pointer;
+        ">
+          Rechazar
+        </button>
+        <button type="button" onclick="aceptarCookies()" style="
+          padding: 0.4rem 0.8rem;
+          border-radius: 4px;
+          border: 1px solid #00bbff;
+          background: #00bbff;
+          color: #000;
+          font-weight: 600;
+          cursor: pointer;
+        ">
+          Aceptar cookies
+        </button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- ENLACE CONTACTO -->
   <a id="contactLink" href="#contacto">CONTÁCTANOS</a>
 
@@ -781,7 +851,7 @@
     <section class="panel" id="contacto" data-start="23.0" data-end="24.8">
       <div class="panel-inner panel-inner--cta">
         <div class="form-wrapper">
-          <h2 class="cta-title">Demostrar el valor de tu local importa</h2>
+          <h2 class="cta-title">DEMOSTRAR EL VALOR DE TU LOCAL IMPORTA</h2>
           <p class="cta-subtitle">Escríbenos para ayudarte a hacerlo visible con datos reales.</p>
 
           <!-- FORMULARIO FORMSpree -->
@@ -1232,6 +1302,48 @@
         if (e.target === dpLayer) closeDP();
       });
     }
+
+        // Guardar/leer consentimiento en localStorage
+    function setCookieConsent(value) {
+      try { localStorage.setItem('cookieConsent', value); }
+      catch (e) { console.warn('No se pudo guardar el consentimiento'); }
+    }
+
+    function getCookieConsent() {
+      try { return localStorage.getItem('cookieConsent'); }
+      catch (e) { return null; }
+    }
+
+    function ocultarBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'none';
+    }
+
+    function mostrarBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'block';
+    }
+
+    function aceptarCookies() {
+      setCookieConsent('accepted');
+      activarCookiesAnaliticas();
+      ocultarBanner();
+    }
+
+    function rechazarCookies() {
+      setCookieConsent('rejected');
+      ocultarBanner();
+      // No activamos analíticas
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const consent = getCookieConsent();
+      if (!consent) {
+        mostrarBanner();
+      } else if (consent === 'accepted') {
+        activarCookiesAnaliticas();
+      }
+    });
   </script>
 
 </body>
