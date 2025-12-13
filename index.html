@@ -34,7 +34,7 @@
   </script>
 
   <meta charset="UTF-8" />
-  <title>Ailitica – Demo scroll ligado al vídeo</title>
+  <title>Ailitica – DEBUG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts: Montserrat -->
@@ -55,16 +55,15 @@
       height: 100%;
     }
 
-    /* Scroll suave para el ancla #contacto */
+    /* Scroll suave */
     html {
       scroll-behavior: smooth;
+      font-size: 16px; /* base genérica, se sobreescribe en desktop/móvil */
     }
 
     :root {
       --accent-blue: #00bbff;
       --text-gray:  #2d3034;
-      --heading-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      --body-size:    1.5rem;
     }
 
     body {
@@ -72,8 +71,10 @@
       color: #ffffff;
       background: #e0e0e0;
       overflow-y: scroll;
+      font-size: 1rem;
     }
 
+   
     /* FRANJA BAJO EL LOGO PARA QUE EL TEXTO PASE POR DEBAJO */
     #logoBand {
       position: fixed;
@@ -81,12 +82,12 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      height: 100px;
+      height: 6vw;
       background: #e0e0e0;
       z-index: 2;
       pointer-events: none;
-      opacity: 0;                     /* OCULTA AL INICIO */
-      transition: opacity 0.4s ease;  /* SUAVE AL APARECER */
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
     /* ===================== VIDEO ====================== */
@@ -106,7 +107,7 @@
       top: 1.5rem;
       left: 2rem;
       z-index: 3;
-      height:45px;
+      height: 2.8rem;
       pointer-events: none;
     }
 
@@ -116,7 +117,7 @@
       top: 2rem;
       right: 2rem;
       z-index: 3;
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: #3a3a3a;
       text-decoration: none;
       font-weight: 600;
@@ -133,7 +134,7 @@
     #logo {
       position: fixed;
       z-index: 3;
-      width: clamp(220px, 40vw, 420px);
+      width: clamp(14rem, 40vw, 26rem);
       height: auto;
       transform-origin: center center;
       transition:
@@ -144,7 +145,7 @@
     }
 
     #logo.logo--center {
-      top: 33%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(1.7);
     }
@@ -158,13 +159,13 @@
     /* TAGLINE */
     #tagline {
       position: fixed;
-      top: 40%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 3;
       color: #50504a;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.85rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       text-align: center;
@@ -183,7 +184,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
-      width: 160px;
+      width: 10rem;
       opacity: 0.7;
       display: flex;
       flex-direction: column;
@@ -198,7 +199,7 @@
     }
 
     .scroll-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #9fa5b1;
@@ -219,7 +220,7 @@
       left: 1.2rem;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 6;              /* por encima del vídeo (que tiene 5 en móvil) */
+      z-index: 6;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -261,39 +262,43 @@
       min-height: 100vh;
     }
 
+    /* Columna de texto en desktop: 1er tercio aprox */
     .panel-inner {
-      max-width: 38rem;
-      padding: 0 0rem;
-      margin-left: 5vw;
-      transform: translateY(120px);
+      width: 28vw;         /* PROPORCIONAL A VW, sin min/max en px */
+      max-width: 28vw;
+      padding: 0;
+      margin-left: 5vw;    /* margen interior respecto al borde */
+      /*transform: translateY(120px);*/
       opacity: 0.7;
       text-align: left;
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .panel--active .panel-inner {
-      transform: translateY(0);
+       /*transform: translateY(0);*/
       opacity: 1;
     }
 
+    /* Tipografía: rem (y rem depende de vw en desktop) */
     h2 {
-      font-size: var(--heading-size);
+      font-size: 3.2rem;
       margin-bottom: 1.5rem;
       color: var(--accent-blue);
       font-weight: 600;
     }
 
-    p {
-      font-size: var(--body-size);
+    .panel-inner p {
+      font-size: 1.2rem;
       line-height: 1.8;
       color: var(--text-gray);
     }
 
-    /* CTA FINAL */
+    /* CTA FINAL: misma columna */
     .panel-inner--cta {
-      max-width: 48rem;
-      margin-left: 3vw;
-      padding: 0 1.5rem;
+      width: 36vw;
+      max-width: 36vw;
+      margin-left: 5vw;
+      padding: 0;
       display: block;
     }
 
@@ -309,7 +314,8 @@
     .cta-subtitle {
       margin-bottom: 2rem;
       color: var(--text-gray);
-      font-size: var(--body-size);
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .form-grid {
@@ -325,7 +331,7 @@
     }
 
     .form-label {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--text-gray);
@@ -338,9 +344,10 @@
       padding: 0.8rem 1.2rem;
       border-radius: 999px;
       border: none;
-      background: #e3e4e8;
+      background: #e0e0e0;
       color: #4a4f57;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-family: inherit;  
       outline: none;
       box-shadow:
         inset 4px 4px 8px rgba(0, 0, 0, 0.12),
@@ -348,7 +355,7 @@
     }
 
     .form-textarea {
-      min-height: 120px;
+      min-height: 5rem;
       border-radius: 1.5rem;
       resize: vertical;
     }
@@ -356,6 +363,8 @@
     .form-input::placeholder,
     .form-textarea::placeholder {
       color: #9da3af;
+      font-size: 0.9rem;
+      font-family: inherit; 
     }
 
     /* CHECKBOXES */
@@ -366,18 +375,31 @@
     }
 
     .form-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1rem;
+      height: 1rem;
       margin-top: 0.2rem;
       flex-shrink: 0;
-      transform: scale(1.05);
+      border-radius: 0.25rem;
+      border: 1.5px solid #5a5d64; /* nuestro gris */
+      background-color: #e0e0e0;           /* mismo fondo que el body */
+      cursor: pointer;
+      position: relative;
     }
+          .form-checkbox:checked {
+          background-color: var(--accent-blue);  /* interior azul */
+          border-color: var(--accent-blue);      /* opcional: borde azul también */
+          }
+
+
 
     .form-checkbox-label {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-gray);
       line-height: 1.4;
     }
 
-    /* Enlace dentro del label de términos */
     .form-checkbox-label a {
       color: inherit;
       text-decoration: underline;
@@ -399,6 +421,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       cursor: pointer;
+      font-size: 0.9rem;
     }
 
     .form-submit:hover {
@@ -407,7 +430,7 @@
 
     .form-footnote {
       margin-top: 1.5rem;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-gray);
     }
 
@@ -434,7 +457,7 @@
 
     .form-success {
       margin-top: 1.5rem;
-      font-size: var(--body-size);
+      font-size: 1rem;
       color: var(--text-gray);
       display: none;
     }
@@ -444,7 +467,7 @@
     }
 
     .form-success-title {
-      font-size: var(--heading-size);
+      font-size: 2rem;
       color: var(--accent-blue);
       font-weight: 600;
       margin-bottom: 1.5rem;
@@ -460,23 +483,24 @@
       color: #f9fafb;
       padding: 1.8rem 3vw 2.2rem;
       margin-top: 2rem;
+      font-size: 0.85rem;
     }
 
     .site-footer-inner {
-      max-width: 1200px;
+      /*max-width: 1200px;*/
+      width:100%;
       margin: 0 auto;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      font-size: 0.9rem;
     }
 
-    /* Columna izquierda: iconos sociales */
     .footer-social {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
       align-items: center;
+      margin-left: 0;
     }
 
     .footer-social a {
@@ -486,8 +510,8 @@
     }
 
     .footer-social img {
-      height: 20px;
-      width: 20px;
+      height: 1.25rem;
+      width: 1.25rem;
       opacity: 0.5;
       filter: brightness(0) invert(1);
       transition: opacity 0.2s ease;
@@ -497,16 +521,16 @@
       opacity: 0.9;
     }
 
-    /* Columna derecha: copyright + enlaces */
     .footer-text {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      text-align: right;
       gap: 0.6rem;
     }
 
     .footer-copy {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #e5e7eb;
     }
 
@@ -520,7 +544,7 @@
     .footer-links a {
       color: #e5e7eb;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     .footer-links a:hover {
@@ -552,6 +576,7 @@
       line-height: 1.6;
       max-height: 85vh;
       overflow-y: auto;
+      font-size: 1rem;
     }
 
     #dp-popup h3 {
@@ -577,6 +602,15 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ========= REGLAS ESPECÍFICAS PARA DESKTOP (fluidez real) ========= */
+    @media (min-width: 769px) {
+      /* aquí la base de rem es 100% proporcional al ancho de la ventana */
+      html {
+        font-size: 0.9vw; /* prueba 0.8–1.0 según lo veas */
+      }
     }
 
     /* vídeo oculto en el último panel SOLO en móvil */
@@ -591,13 +625,24 @@
     /* =========================  MÓVIL  ========================= */
     @media (max-width: 768px) {
 
-      :root {
-        --heading-size: 2rem;
-        --body-size: 1rem;
+      /* En móvil base fija (no queremos ese comportamiento de “zoom”) */
+      html {
+        font-size: clamp(14px, 3.8vw, 18px);
+      }
+      /* Títulos azules más pequeños en móvil */
+      h2 {
+        font-size: 2rem;      /* prueba entre 1.2 y 1.6 */
+        line-height: 1.3;
+      }
+        /* Párrafos más pequeños en móvil */
+      .panel-inner p {
+         font-size: 1.05rem;   /* prueba entre 0.9 y 1.0 */
+         line-height: 1.6;
       }
 
+
       #icon {
-        height: 22px;
+        height: 1.4rem;
         top: 1.5rem;
         left: 1.5rem;
       }
@@ -605,7 +650,7 @@
       #contactLink {
         top: 2rem;
         right: 1.2rem;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
 
       #logoBand {
@@ -626,7 +671,7 @@
       }
 
       #logo {
-        width: clamp(180px, 65vw, 320px);
+        width: clamp(11rem, 65vw, 20rem);
       }
 
       #logo.logo--center {
@@ -643,19 +688,19 @@
 
       #tagline {
         top: 38%;
-        font-size: 0.85rem;
         padding: 0 1.5rem;
+        font-size: 0.8rem;
       }
 
       #scrollLottie {
         bottom: 1rem;
-        width: 120px;
+        width: 7.5rem;
       }
 
       .scroll-progress {
-        top: 70px;              /* justo debajo de la banda superior */
-        transform: none;        /* eliminamos el centrado */
-        left: 0.8rem;           
+        top: 70px;
+        transform: none;
+        left: 0.8rem;
       }
 
       .scroll-progress-track {
@@ -671,23 +716,24 @@
         min-height: 100vh;
       }
 
+      /* En móvil el texto ocupa todo el ancho */
       .panel-inner,
       .panel-inner--cta {
         margin-left: 0;
         margin-right: 0;
+        width: 100%;
         max-width: 100%;
         padding: 2.5rem 1.5rem;
       }
 
       .panel:last-of-type {
-        padding-bottom: 0rem;
+        padding-bottom: 0;
       }
 
       .form-wrapper {
         max-width: 100%;
       }
 
-      /* Footer móvil: iconos arriba, luego copyright, luego enlaces en columna */
       .site-footer-inner {
         flex-direction: column;
         align-items: flex-start;
@@ -707,6 +753,7 @@
   </style>
 </head>
 <body>
+
 
   <!-- Franja fija bajo el logo -->
   <div id="logoBand"></div>
@@ -827,9 +874,9 @@
     <!-- PANEL 4 -->
     <section class="panel" data-start="13.72" data-end="15.50">
       <div class="panel-inner">
-        <h2>TRANSIMITE CONFIANZA DESDE EL RIGOR Y LA TRANSPARENCIA</h2>
+        <h2>TRANSMITE CONFIANZA DESDE EL RIGOR Y LA TRANSPARENCIA</h2>
         <p>
-          Un sistema diseñado para proteger la privacidad y generar confianza durante el proceso de comercializacion.
+          Un sistema diseñado para proteger la privacidad y generar confianza durante el proceso de comercialización.
           Proporcionamos información clara, anónima y plenamente fiable.
         </p>
       </div>
@@ -855,7 +902,6 @@
           <p class="cta-subtitle">Escríbenos para ayudarte a hacerlo visible con datos reales.</p>
 
           <!-- FORMULARIO FORMSpree -->
-          <!-- IMPORTANTE: cambia TU_FORM_ID por el ID real de tu formulario en Formspree -->
           <form
             id="contact-form"
             class="form-grid"
@@ -863,7 +909,6 @@
             method="POST"
             accept-charset="UTF-8"
           >
-            <!-- Campo oculto para el asunto del correo -->
             <input type="hidden" name="_subject" value="Nuevo contacto desde Ailitica" />
 
             <div class="form-row">
@@ -900,7 +945,6 @@
               ></textarea>
             </div>
 
-            <!-- Acepto términos (OBLIGATORIO) -->
             <div class="form-row form-row--checkbox">
               <input
                 id="acepto-terminos"
@@ -915,7 +959,6 @@
               </label>
             </div>
 
-            <!-- Newsletter (OPCIONAL) -->
             <div class="form-row form-row--checkbox">
               <input
                 id="acepto-newsletter"
@@ -929,7 +972,6 @@
               </label>
             </div>
 
-            <!-- Información básica de protección de datos -->
             <div class="form-dataprotection">
               <a href="#" id="open-dp-popup">Información básica de protección de datos</a>
             </div>
@@ -965,20 +1007,18 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <!-- Iconos sociales izquierda -->
-      <div class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-          <img src="ig_logo.png" alt="Instagram">
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-          <img src="in_logo.png" alt="LinkedIn">
-        </a>
-        <a href="https://x.com/ailitica" target="_blank" rel="noopener noreferrer">
-          <img src="x_logo.png" alt="X">
-        </a>
-      </div>
+          <div class="footer-social">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                              <img src="in_logo.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/ailitica" target="_blank" rel="noopener noreferrer">
+                              <img src="x_logo.png" alt="X">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                              <img src="ig_logo.png" alt="Instagram">
+                    </a>
+          </div>
 
-      <!-- Texto derecha -->
       <div class="footer-text">
         <div class="footer-copy">
           Copyright © 2025 Ailítica S.L.
@@ -1031,7 +1071,6 @@
     let introDone      = false;
     let activeIndex    = 0;
     let currentSegment = null;
-    
 
     const INTRO_END_TIME_SEC  = 1.1;
     const INTRO_END_DELAY_MS  = 1100;
@@ -1124,54 +1163,43 @@
         scrollLottie.classList.remove('scroll-hidden');
       }
     }
-    
+
     function updateScrollProgress() {
       if (!introDone) return;
 
-      const firstPanel = panels[1]; // panel 1 (después de la intro)
-      const lastPanel  = panels[panels.length - 1]; // CTA
+      const firstPanel = panels[1];
+      const lastPanel  = panels[panels.length - 1];
 
       if (!firstPanel || !lastPanel) return;
 
       const scrollY        = window.scrollY;
       const viewportHeight = window.innerHeight;
 
-      // ----- INICIO DEL RECORRIDO -----
-      // Antes lo poníamos EXACTAMENTE en firstPanel.offsetTop.
-      // Ahora adelantamos un poco el inicio (30% de la altura de la ventana),
-      // para que la barra empiece a aparecer antes de que el texto esté tan arriba.
       const startRaw    = firstPanel.offsetTop;
       const startScroll = Math.max(startRaw - viewportHeight * 0.3, 0);
 
-      // ----- FINAL DEL RECORRIDO -----
       const lastBottom = lastPanel.offsetTop + lastPanel.offsetHeight;
       const endScroll  = lastBottom - viewportHeight;
 
-      // Si todavía estás por debajo del final de la intro -> barra oculta
       if (scrollY <= startScroll) {
         scrollProgress.style.opacity = '0';
         scrollProgressFill.style.height = '0%';
         return;
       }
 
-      // A partir de aquí, barra visible
       scrollProgress.style.opacity = '1';
 
-      // Seguridad por si endScroll <= startScroll (casos extremos)
       if (endScroll <= startScroll) {
         scrollProgressFill.style.height = '100%';
         return;
       }
 
-      // Clamp del scroll para que el porcentaje vaya de 0 a 100%
       const clamped  = Math.min(Math.max(scrollY, startScroll), endScroll);
       const progress = (clamped - startScroll) / (endScroll - startScroll);
       const percent  = progress * 100;
 
       scrollProgressFill.style.height = percent + '%';
     }
-
-
 
     window.addEventListener('scroll', () => {
       if (!introDone) return;
@@ -1180,7 +1208,7 @@
       const viewportCenter = scrollY + window.innerHeight / 2;
 
       let nearestIndex = 0;
-      let minDistance = Infinity;
+      let minDistance  = Infinity;
 
       for (let i = 0; i < panels.length; i++) {
         const panelTop    = panels[i].offsetTop;
@@ -1303,7 +1331,7 @@
       });
     }
 
-        // Guardar/leer consentimiento en localStorage
+    // Guardar/leer consentimiento en localStorage
     function setCookieConsent(value) {
       try { localStorage.setItem('cookieConsent', value); }
       catch (e) { console.warn('No se pudo guardar el consentimiento'); }
@@ -1333,7 +1361,6 @@
     function rechazarCookies() {
       setCookieConsent('rejected');
       ocultarBanner();
-      // No activamos analíticas
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -1348,10 +1375,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
