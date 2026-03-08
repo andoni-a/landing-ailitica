@@ -8,7 +8,7 @@
     "excerpt": "Automatizar procesos empresariales no es solo ahorrar tiempo. Es decidir qué merece la atención de tu equipo y qué no. Explicamos cómo identificar qué automatizar y cómo hacerlo sin riesgo.",
     "lead": "Automatizar procesos empresariales no significa sustituir personas. Significa que las personas dejen de hacer lo que no requiere su criterio, para concentrarse en lo que sí lo requiere. La diferencia parece sutil. Las consecuencias para una empresa de 50 personas son enormes.",
     "readtime": "6 min",
-    "featured": false,
+    "featured": true,
     "body": [
       {
         "type": "h2",
@@ -151,7 +151,7 @@
     "excerpt": "Un agente de IA no es un chatbot. Es un sistema que toma decisiones, ejecuta acciones y aprende del resultado. Explicamos qué son, cómo funcionan y qué pueden hacer por tu empresa hoy.",
     "lead": "Un agente de IA no es un chatbot. Es un sistema que percibe su entorno, toma decisiones y ejecuta acciones de forma autónoma, con el humano como árbitro final. La diferencia parece técnica. Las consecuencias son estratégicas.",
     "readtime": "5 min",
-    "featured": true,
+    "featured": false,
     "body": [
       { "type": "h2", "text": "La confusión que frena a muchas empresas" },
       { "type": "p",  "text": "Cuando la mayoría de directivos escuchan \"inteligencia artificial\", piensan en un chatbot que responde preguntas o en una herramienta que genera texto. Eso es comprensible: es lo que más han visto. Pero es también la razón por la que tantas implementaciones de IA decepcionan." },
