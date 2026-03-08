@@ -261,9 +261,9 @@ nav.scrolled {
   backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
   padding:16px var(--col-pad);
 }
-.nav-logo { display:flex; align-items:center; gap:10px; }
-.nav-logo .logo-icon { width:auto; height:22px; opacity:.85; }
-.nav-logo .logo-text { height:22px; mix-blend-mode:screen; filter:brightness(1.1); }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-logo .logo-icon { width:auto; height:28px; opacity:.85; }
+.nav-logo .logo-text { height:28px; mix-blend-mode:screen; filter:brightness(1.1); }
 .nav-links { display:flex; gap:36px; list-style:none; }
 .nav-links a {
   color:var(--text-secondary); text-decoration:none;
@@ -760,10 +760,10 @@ footer {
 <canvas id="neural-canvas"></canvas>
 
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
-  <div class="nav-logo">
+  <a class="nav-logo" href="/" aria-label="Inicio">
     <img class="logo-icon" src="icon.png" alt="">
     <img class="logo-text" src="ailitica.png" alt="Ailitica">
-  </div>
+  </a>
   <ul class="nav-links">
     <li><a href="#manifesto">Filosofía</a></li>
     <li><a href="#metodo">Método</a></li>
