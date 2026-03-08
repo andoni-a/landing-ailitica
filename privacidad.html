@@ -1,434 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de privacidad — Ailitica</title>
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500&family=Google+Sans+Text:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWNT3YC598"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-PWNT3YC598');
 </script>
-  <meta charset="UTF-8" />
-  <title>Política de Privacidad – Ailítica</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  <!-- Google Fonts: Montserrat -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet"
-  >
+:root {
+  --bg:             #020a1a;
+  --text-primary:   #eef2ff;
+  --text-secondary: rgba(160,195,240,0.65);
+  --text-dim:       rgba(120,160,210,0.38);
+  --accent:         #4ab3ff;
+  --accent-soft:    rgba(74,179,255,0.11);
+  --border:         rgba(74,179,255,0.15);
+  --border-soft:    rgba(74,179,255,0.08);
+  --glass-bg:       rgba(2,8,20,0.50);
+  --radius-sm:      16px;
+  --radius-md:      24px;
+  --font-d: 'Google Sans', sans-serif;
+  --font-b: 'Google Sans Text','Google Sans',sans-serif;
+  --col-w:   min(860px, 72vw);
+  --col-pad: clamp(36px, 5vw, 80px);
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text-primary);
+  font-family:var(--font-b); font-weight:300;
+  overflow-x:hidden; cursor:none;
+}
 
-    html, body {
-      height: 100%;
-    }
+/* Cursor */
+#cursor {
+  position:fixed; top:0; left:0; pointer-events:none; z-index:9999;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 10px var(--accent);
+  transform:translate(-50%,-50%); mix-blend-mode:screen;
+  transition:width .12s,height .12s;
+}
 
-    :root {
-      --accent-blue: #00bbff;
-      --text-gray:  #2d3034;
-      --heading-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      --body-size:    1.2rem;
-    }
+/* Nav */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:26px var(--col-pad);
+  background:rgba(2,6,18,0.86);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-logo .logo-icon { width:auto; height:28px; opacity:.85; }
+.nav-logo .logo-text { height:42px; mix-blend-mode:screen; filter:brightness(1.1); }
+.nav-back {
+  background:transparent; border:1px solid var(--border); color:var(--accent);
+  font-family:var(--font-d); font-size:13px; letter-spacing:.05em;
+  padding:9px 22px; border-radius:50px; cursor:none; text-decoration:none;
+  transition:background .2s, border-color .2s;
+}
+.nav-back:hover { background:var(--accent-soft); border-color:rgba(74,179,255,.4); }
 
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-gray);
-      background: #e0e0e0;
-      overflow-x: hidden;
-    }
+/* Layout */
+main {
+  max-width:var(--col-w); margin:0 auto;
+  padding:130px var(--col-pad) 80px;
+}
 
-    /* ===== Mismo header que en index ===== */
+/* Legal content */
+.legal-label {
+  font-family:var(--font-d); font-size:10px; font-weight:400;
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--accent); opacity:.75; margin-bottom:20px; display:block;
+}
+.legal-h1 {
+  font-family:var(--font-d); font-size:clamp(32px,4vw,56px);
+  font-weight:300; line-height:1.1; letter-spacing:-.022em;
+  color:var(--text-primary); margin-bottom:10px;
+}
+.legal-version {
+  font-size:12px; color:var(--text-dim); letter-spacing:.06em;
+  margin-bottom:48px; display:block;
+}
+.legal-body {
+  font-size:15px; line-height:1.85; color:var(--text-secondary);
+}
+.legal-body h2 {
+  font-family:var(--font-d); font-size:16px; font-weight:400;
+  color:var(--text-primary); letter-spacing:-.01em;
+  margin-top:40px; margin-bottom:10px;
+}
+.legal-body h3 {
+  font-family:var(--font-d); font-size:14px; font-weight:400;
+  color:var(--text-secondary); letter-spacing:.01em;
+  margin-top:20px; margin-bottom:6px;
+}
+.legal-body p { margin-bottom:14px; }
+.legal-body ul, .legal-body ol {
+  padding-left:20px; margin-bottom:14px;
+}
+.legal-body li { margin-bottom:6px; }
+.legal-body a { color:var(--accent); text-decoration:none; }
+.legal-body a:hover { text-decoration:underline; }
+.legal-body strong { color:var(--text-primary); font-weight:400; }
+.legal-body table {
+  width:100%; border-collapse:collapse; margin:16px 0;
+  font-size:13px;
+}
+.legal-body th {
+  text-align:left; padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  color:var(--text-primary); font-family:var(--font-d); font-weight:400;
+  font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+}
+.legal-body td {
+  padding:10px 12px; border-bottom:1px solid var(--border-soft);
+  color:var(--text-secondary);
+}
+.legal-body tr:hover td { background:var(--accent-soft); }
 
-    /* Franja fija bajo el logo */
-    #logoBand {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100px;
-      background: #e0e0e0;
-      z-index: 2;
-      pointer-events: none;
-    }
+/* Divider */
+.legal-divider {
+  height:1px; margin:48px 0;
+  background:linear-gradient(to right, var(--border), transparent);
+}
 
-    /* Icono esquina izquierda */
-    #icon {
-      position: fixed;
-      top: 1.5rem;
-      left: 2rem;
-      z-index: 3;
-      height:45px;
-      pointer-events: none;
-    }
+/* Footer */
+footer {
+  border-top:1px solid var(--border-soft); padding:28px var(--col-pad);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:16px 24px;
+}
+.footer-logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
+.footer-logo .logo-icon { width:auto; height:16px; opacity:.35; }
+.footer-logo .logo-text { height:16px; mix-blend-mode:screen; opacity:.55; filter:brightness(1.1); }
+.footer-copy { font-size:11px; color:var(--text-dim); letter-spacing:.04em; }
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+.footer-links a { font-size:11px; color:var(--text-dim); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--text-secondary); }
 
-    /* Enlace VOLVER esquina derecha */
-    #contactLink {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      z-index: 3;
-      font-size: 1rem;
-      color: #3a3a3a;
-      text-decoration: none;
-      font-weight: 600;
-      opacity: 1; /* siempre visible en esta página */
-      cursor: pointer;
-    }
-
-    #contactLink:hover {
-      color: var(--accent-blue);
-    }
-
-    /* LOGO: mismas reglas que en index */
-    #logo {
-      position: fixed;
-      z-index: 3;
-      width: clamp(220px, 40vw, 420px);
-      height: auto;
-      transform-origin: center center;
-      transition:
-        top 0.6s ease,
-        left 0.6s ease,
-        transform 0.6s ease;
-      pointer-events: none;
-    }
-
-    #logo.logo--center {
-      top: 33%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1.7);
-    }
-
-    #logo.logo--top {
-      top: 1.5rem;
-      left: 50%;
-      transform: translate(-50%, 0) scale(1);
-    }
-
-    /* ===== Contenido legal ===== */
-
-    main {
-      width: 100%;
-      padding: 160px 6vw 80px; /* espacio para header + logo */
-    }
-
-    .legal-content {
-      max-width: 900px;
-      margin: 0 auto;
-      font-size: var(--body-size);
-      line-height: 1.8;
-    }
-
-    .legal-content h1 {
-      font-size: var(--heading-size);
-      color: var(--accent-blue);
-      margin-bottom: 1.4rem;
-      font-weight: 600;
-    }
-
-    .legal-content h2 {
-      font-size: 1.3rem;
-      margin-top: 1.8rem;
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-    }
-
-    .legal-content p,
-    .legal-content li {
-      margin-bottom: 0.8rem;
-    }
-
-    .legal-content ul,
-    .legal-content ol {
-      padding-left: 1.5rem;
-    }
-
-    .legal-content a {
-      color: var(--accent-blue);
-      text-decoration: none;
-    }
-
-    .legal-content a:hover {
-      text-decoration: underline;
-    }
-
-    /* ===== Footer igual que index ===== */
-
-    .site-footer {
-      background: #3a3a3a;
-      color: #f9fafb;
-      padding: 1.2rem 3vw;
-      margin-top: 2rem;
-    }
-
-    .site-footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-    }
-
-    .footer-link {
-      color: #e5e7eb;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .footer-link:hover {
-      text-decoration: underline;
-    }
-
-    /* ===== Versión móvil: mismas reglas que en index ===== */
-    @media (max-width: 768px) {
-
-      :root {
-        --heading-size: 2rem;
-        --body-size: 1rem;
-      }
-
-      #icon {
-        height: 22px;
-        top: 1.5rem;
-        left: 1.5rem;
-      }
-
-      #contactLink {
-        top: 2rem;
-        right: 1.2rem;
-        font-size: 0.9rem;
-      }
-
-      #logoBand {
-        height: 70px;
-      }
-
-      #logo {
-        width: clamp(180px, 65vw, 320px);
-      }
-
-      #logo.logo--center {
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-
-      #logo.logo--top {
-        top: 1.5rem;
-        left: 46%;
-        transform: translate(-50%, 0) scale(0.7);
-      }
-
-      main {
-        padding: 120px 6vw 60px; /* un poco menos de margen bajo en móvil */
-      }
-
-      .legal-content {
-        font-size: 1rem;
-      }
-
-      .site-footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .footer-right {
-        gap: 0.6rem;
-      }
-    }
-  </style>
+@media (max-width:560px) {
+  :root { --col-w:100%; --col-pad:24px; }
+  nav { padding:20px 24px; }
+  main { padding:100px 24px 60px; }
+  footer { flex-direction:column; gap:20px; text-align:center; }
+  .footer-links { flex-wrap:wrap; justify-content:center; }
+}
+</style>
 </head>
 <body>
+<div id="cursor"></div>
 
-  <!-- Header igual que en index -->
-  <div id="logoBand"></div>
-  <img id="icon" src="icon.png" alt="Icono Ailitica" />
-  <a id="contactLink" href="index.html">VOLVER</a>
-  <!-- OJO: dejamos el logo en modo "top", igual que cuando en index ya ha subido -->
-  <img id="logo" class="logo--top" src="ailitica.png" alt="Ailitica" />
+<nav>
+  <a class="nav-logo" href="/" aria-label="Inicio">
+    <img class="logo-icon" src="icon.png" alt="">
+    <img class="logo-text" src="ailitica.png" alt="Ailitica">
+  </a>
+  <a class="nav-back" href="/">Volver</a>
+</nav>
 
-  <main>
-    <article class="legal-content">
+<main>
+  <span class="legal-label">Legal</span>
+  <h1 class="legal-h1">Política de privacidad</h1>
+  <span class="legal-version">Versión 1.0 — Diciembre 2025</span>
+  <div class="legal-body">
 
-      <h1>Política de privacidad</h1>
-      <p><strong>Versión 1.0 – Fecha: DIC/2025</strong></p>
-    
-      <!-- ======================= -->
-      <h2>1. Identidad del responsable</h2>
-      <p>
-        En cumplimiento del RGPD y la LOPDGDD, se informa que los datos personales que facilites
-        a través de la web <strong>www.ailitica.com</strong> serán tratados por:
-      </p>
-      <ul>
-        <li><strong>Responsable del tratamiento:</strong> Ailitica S.L.</li>
-        <li><strong>CIF:</strong> 11111111X</li>
-        <li><strong>Domicilio social:</strong> XXXXXX</li>
-        <li><strong>Email:</strong> hola@ailitica.com</li>
-        <li><strong>Teléfono:</strong> 111111111</li>
-      </ul>
-    
-      <!-- ======================= -->
-      <h2>2. Finalidades del tratamiento</h2>
-      <p>Los datos personales que proporciones a través de los formularios de la Web serán tratados con las siguientes finalidades:</p>
-      <ul>
-        <li>Gestionar y responder a tus solicitudes de información o contacto.</li>
-        <li>Atender consultas y comunicaciones solicitadas por el usuario.</li>
-      </ul>
-      <p>No se utilizarán tus datos para finalidades distintas sin tu consentimiento explícito.</p>
-    
-      <!-- ======================= -->
-      <h2>3. Base jurídica del tratamiento</h2>
-      <p>Los tratamientos se realizan en base a:</p>
-      <ul>
-        <li>Ejecución de una solicitud o consulta del interesado, artículo 6.1.b) del RGPD.</li>
-        <li>
-          En caso de consentimiento expreso para comunicaciones comerciales,
-          consentimiento del interesado, artículo 6.1.a) del RGPD (solo si se solicita activamente).
-        </li>
-      </ul>
-    
-      <!-- ======================= -->
-      <h2>4. Tipos de datos personales que se tratan</h2>
-      <p>Los datos que tratamos pueden incluir:</p>
-      <ul>
-        <li>Nombre y apellidos</li>
-        <li>Dirección de correo electrónico</li>
-        <li>Teléfono de contacto</li>
-        <li>Cualquier otro dato que decidas facilitar en el formulario</li>
-      </ul>
-      <p>
-        No se recogen ni procesan categorías especiales de datos (sensibles) salvo que nos los facilites
-        expresamente; en tal caso se gestionarán conforme exige el RGPD.
-      </p>
-    
-      <!-- ======================= -->
-      <h2>5. Plazo de conservación de los datos</h2>
-      <p>Los datos personales se conservarán durante el tiempo necesario para:</p>
-      <ul>
-        <li>atender tu solicitud,</li>
-        <li>cumplir con obligaciones legales,</li>
-        <li>o durante el periodo en que no se ejerzan los derechos correspondientes.</li>
-      </ul>
-      <p>Una vez cumplidos estos fines, Ailitica eliminará o anonimizará los datos de forma segura.</p>
-    
-      <!-- ======================= -->
-      <h2>6. Comunicación de datos a terceros</h2>
-      <p>Los datos personales no se comunicarán a terceros, salvo en los casos en que:</p>
-      <ul>
-        <li>sea necesario para dar cumplimiento a una obligación legal,</li>
-        <li>sea requerido por autoridad competente,</li>
-        <li>tengamos tu consentimiento explícito para compartir los datos.</li>
-      </ul>
-      <p>Ailitica no vende, alquila ni comparte datos con terceros para fines comerciales.</p>
-    
-      <!-- ======================= -->
-      <h2>7. Transferencias internacionales de datos</h2>
-      <p>
-        Los datos recogidos no se transferirán fuera del Espacio Económico Europeo (EEE).
-        Si en algún momento se realizara una transferencia, se aplicarán las garantías apropiadas exigidas por el RGPD.
-      </p>
-    
-      <!-- ======================= -->
-      <h2>8. Seguridad de los datos</h2>
-      <p>Ailitica ha implementado medidas técnicas y organizativas adecuadas para garantizar un nivel de seguridad adecuado, incluyendo:</p>
-      <ul>
-        <li>cifrado de comunicaciones (HTTPS),</li>
-        <li>controles de acceso internos,</li>
-        <li>limitaciones de acceso a datos al personal autorizado.</li>
-      </ul>
-      <p>
-        Sin embargo, ningún sistema de transmisión o almacenamiento es absolutamente seguro; 
-        la seguridad perfecta no existe.
-      </p>
-    
-      <!-- ======================= -->
-      <h2>9. Derechos de los interesados</h2>
-      <p>Puedes ejercer los siguientes derechos conforme al RGPD y la LOPDGDD:</p>
-      <ul>
-        <li>Acceso a tus datos</li>
-        <li>Rectificación de datos inexactos</li>
-        <li>Supresión de datos cuando ya no sean necesarios</li>
-        <li>Limitación del tratamiento</li>
-        <li>Oposición al tratamiento</li>
-        <li>Portabilidad de los datos</li>
-      </ul>
-      <p>Para ejercer tus derechos, envía tu solicitud a:</p>
-      <ul>
-        <li><strong>Email:</strong> hola@ailitica.com</li>
-        <li><strong>Dirección postal:</strong> XXXXXX</li>
-      </ul>
-      <p>
-        Junto con tu solicitud deberás acompañar una copia de tu DNI o documento equivalente 
-        que permita verificar tu identidad.
-      </p>
-    
-      <!-- ======================= -->
-      <h2>10. Derecho a presentar una reclamación</h2>
-      <p>
-        Si consideras que el tratamiento de tus datos vulnera la normativa vigente, tienes derecho a presentar
-        una reclamación ante la Autoridad de Control:
-      </p>
-      <p>
-        <strong>Agencia Española de Protección de Datos (AEPD)</strong><br>
-        <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">https://www.aepd.es</a>
-      </p>
-    
-      <!-- ======================= -->
-      <h2>11. Menores de edad</h2>
-      <p>
-        La Web no está dirigida a menores de 14 años.  
-        No se recogerán datos de menores sin el consentimiento de sus padres o representación legal.
-      </p>
-      <p>
-        Si eres padre/madre o tutor legal y detectas que hemos recogido datos de un menor sin el debido consentimiento,
-        contacta con nosotros para proceder a su eliminación inmediata.
-      </p>
-    
-      <!-- ======================= -->
-      <h2>12. Cambios en la Política de Privacidad</h2>
-      <p>
-        Ailitica podrá modificar esta Política en cualquier momento.  
-        Las modificaciones se publicarán en la Web con indicación de la fecha de actualización.  
-        El uso continuado de la Web tras la publicación de cambios constituye aceptación de la nueva Política.
-      </p>
-    
-    </article>
+    <h2>1. Identidad del responsable</h2>
+    <p>En cumplimiento del RGPD y la LOPDGDD, los datos personales facilitados a través de <strong>www.ailitica.com</strong> serán tratados por:</p>
+    <ul>
+      <li><strong>Responsable:</strong> Ailitica S.L.</li>
+      <li><strong>CIF:</strong> 11111111X</li>
+      <li><strong>Domicilio social:</strong> XXXXXX</li>
+      <li><strong>Email:</strong> hola@ailitica.com</li>
+    </ul>
 
-  </main>
+    <div class="legal-divider"></div>
 
-  <footer class="site-footer">
-    <div class="site-footer-inner">
-      <div class="footer-left">
-        Copyright © 2025 Ailítica S.L..
-      </div>
-      <div class="footer-right">
-        <a href="terminos.html" class="footer-link">Términos y condiciones</a>
-        <a href="cookies.html" class="footer-link">Política de cookies</a>
-        <a href="privacidad.html" class="footer-link">Política de privacidad</a>
-      </div>
-    </div>
-  </footer>
+    <h2>2. Finalidades del tratamiento</h2>
+    <p>Los datos facilitados a través de los formularios de la Web serán tratados para gestionar y responder a tus solicitudes de información o contacto. No se utilizarán para finalidades distintas sin tu consentimiento explícito.</p>
 
+    <div class="legal-divider"></div>
+
+    <h2>3. Base jurídica</h2>
+    <ul>
+      <li>Ejecución de una solicitud del interesado, artículo 6.1.b) del RGPD.</li>
+      <li>Consentimiento expreso para comunicaciones comerciales, artículo 6.1.a) del RGPD (solo si se solicita activamente).</li>
+    </ul>
+
+    <div class="legal-divider"></div>
+
+    <h2>4. Datos que se tratan</h2>
+    <ul>
+      <li>Nombre y apellidos</li>
+      <li>Dirección de correo electrónico</li>
+      <li>Empresa</li>
+      <li>Cualquier otro dato que decidas facilitar en el formulario</li>
+    </ul>
+    <p>No se recogen categorías especiales de datos salvo que los facilites expresamente.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>5. Plazo de conservación</h2>
+    <p>Los datos se conservarán el tiempo necesario para atender tu solicitud y cumplir con obligaciones legales. Una vez cumplidos estos fines, Ailitica los eliminará o anonimizará de forma segura.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>6. Comunicación a terceros</h2>
+    <p>Los datos no se comunicarán a terceros salvo obligación legal, requerimiento de autoridad competente o consentimiento explícito. Ailitica no vende ni comparte datos con terceros para fines comerciales.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>7. Transferencias internacionales</h2>
+    <p>Los datos no se transferirán fuera del Espacio Económico Europeo. Si en algún momento se realizara una transferencia, se aplicarán las garantías exigidas por el RGPD.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>8. Seguridad</h2>
+    <p>Ailitica ha implementado medidas técnicas y organizativas adecuadas: cifrado HTTPS, controles de acceso y limitación de acceso al personal autorizado.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>9. Derechos de los interesados</h2>
+    <p>Puedes ejercer los derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad enviando tu solicitud a <a href="mailto:hola@ailitica.com">hola@ailitica.com</a> junto con una copia de tu DNI.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>10. Reclamaciones</h2>
+    <p>Si consideras que el tratamiento de tus datos vulnera la normativa, puedes presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a></p>
+
+    <div class="legal-divider"></div>
+
+    <h2>11. Menores de edad</h2>
+    <p>La Web no está dirigida a menores de 14 años. Si detectas que hemos recogido datos de un menor sin el debido consentimiento, contacta con nosotros para su eliminación inmediata.</p>
+
+    <div class="legal-divider"></div>
+
+    <h2>12. Cambios en esta Política</h2>
+    <p>Ailitica podrá modificar esta Política en cualquier momento. Las modificaciones se publicarán en la Web con indicación de la fecha de actualización.</p>
+  </div>
+</main>
+
+<footer>
+  <a class="footer-logo" href="/">
+    <img class="logo-icon" src="icon.png" alt="">
+    <img class="logo-text" src="ailitica.png" alt="Ailitica">
+  </a>
+  <p class="footer-copy">© 2025 Ailitica. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="/terminos">Términos y condiciones</a>
+    <a href="/cookies">Política de cookies</a>
+    <a href="/privacidad">Política de privacidad</a>
+    <a href="mailto:hola@ailitica.com">hola@ailitica.com</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+</script>
 </body>
 </html>
-
-
-
