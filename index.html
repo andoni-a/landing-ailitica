@@ -278,7 +278,7 @@ section:not(#hero) + section::before {
   display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
 }
 
-.flip-card { height:270px; perspective:1000px; cursor:none; }
+.flip-card { height:310px; perspective:1000px; cursor:none; }
 .flip-inner {
   position:relative; width:100%; height:100%;
   transform-style:preserve-3d;
@@ -301,6 +301,7 @@ section:not(#hero) + section::before {
   border-color:rgba(74,179,255,.30);
   background:rgba(2,10,30,0.68);
 }
+.flip-front { justify-content:flex-start; }
 .flip-back {
   transform:rotateY(180deg);
   justify-content:flex-start;
@@ -338,16 +339,16 @@ section:not(#hero) + section::before {
   color:var(--accent); opacity:.5; margin-bottom:10px;
 }
 .flip-headline {
-  font-family:var(--font-d); font-size:15px; font-weight:400;
-  color:var(--text-primary); line-height:1.35; margin-bottom:14px;
+  font-family:var(--font-d); font-size:clamp(12px,1.1vw,14px); font-weight:400;
+  color:var(--text-primary); line-height:1.4; margin-bottom:12px;
   letter-spacing:-.01em;
 }
 .flip-divider {
-  width:100%; height:1px; margin-bottom:14px;
+  width:100%; height:1px; margin-bottom:12px;
   background:linear-gradient(to right,rgba(74,179,255,.25),transparent);
 }
 .flip-desc {
-  font-size:13px; line-height:1.7; color:var(--text-secondary);
+  font-size:clamp(11px,1vw,12.5px); line-height:1.65; color:var(--text-secondary);
 }
 
 /* ════ VALOR — flip grid 3 col ═════════════════════════════════ */
@@ -545,13 +546,33 @@ footer {
   .hamburger { display:flex; }
   section { padding-top:80px; padding-bottom:80px; }
   #hero { padding-top:120px; }
-  /* Flip cards: taller on mobile so text fits */
-  .flip-grid { grid-template-columns:1fr 1fr; gap:10px; }
-  .flip-card { height:240px; }
-  .flip-title { font-size:17px; }
-  .flip-teaser { font-size:11.5px; }
-  .flip-front, .flip-back { padding:18px 16px; }
-  /* Valor cards: single col, taller */
+
+  /* Flip cards mobile: columna única, altura automática, sin flip */
+  .flip-grid { grid-template-columns:1fr; gap:10px; }
+  .flip-card { height:auto; perspective:none; }
+  .flip-inner { transform:none !important; transition:none; transform-style:flat; }
+  .flip-front { display:none; }
+  .flip-back {
+    position:relative; transform:none;
+    height:auto; padding:22px 20px;
+    border-color:rgba(74,179,255,.18);
+    background:rgba(2,10,30,0.60);
+    /* revelar con scroll */
+    opacity:0; transform:translateY(16px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .flip-back.mob-visible {
+    opacity:1; transform:translateY(0);
+  }
+  /* pequeño número de paso visible en móvil */
+  .flip-back::before {
+    content: attr(data-num);
+    display:block; margin-bottom:8px;
+    font-family:var(--font-d); font-size:9px; letter-spacing:.22em;
+    color:var(--accent); opacity:.45; text-transform:uppercase;
+  }
+
+  /* Valor cards: single col */
   .valor-grid { grid-template-columns:1fr; }
   .v-card { height:200px; }
   .v-phrase { font-size:clamp(15px,5vw,19px); }
@@ -662,9 +683,9 @@ footer {
               <p class="flip-teaser">¿Dónde está realmente el cuello de botella de tu empresa?</p>
               <div class="flip-hint">descubrir</div>
             </div>
-            <div class="flip-back">
+            <div class="flip-back" data-num="paso 01">
               <p class="flip-blabel">Lo que hacemos</p>
-              <p class="flip-headline">Mapeamos tu pipeline completo e identificamos dónde la IA libera capacidad humana real.</p>
+              <p class="flip-headline">Mapeamos tu pipeline e identificamos dónde la IA libera capacidad humana real.</p>
               <div class="flip-divider"></div>
               <p class="flip-desc">Analizamos tu sector, tus procesos y tu equipo. El resultado: un diagnóstico exacto, sin suposiciones.</p>
             </div>
@@ -679,7 +700,7 @@ footer {
               <p class="flip-teaser">Tu empresa no es genérica. Tu solución tampoco debería serlo.</p>
               <div class="flip-hint">descubrir</div>
             </div>
-            <div class="flip-back">
+            <div class="flip-back" data-num="paso 02">
               <p class="flip-blabel">Lo que hacemos</p>
               <p class="flip-headline">Arquitectura de agentes construida exclusivamente para tu contexto.</p>
               <div class="flip-divider"></div>
@@ -696,7 +717,7 @@ footer {
               <p class="flip-teaser">La IA ejecuta. Tú validas, activas y decides.</p>
               <div class="flip-hint">descubrir</div>
             </div>
-            <div class="flip-back">
+            <div class="flip-back" data-num="paso 03">
               <p class="flip-blabel">Lo que hacemos</p>
               <p class="flip-headline">Integración en tus sistemas actuales con el humano siempre al mando.</p>
               <div class="flip-divider"></div>
@@ -713,9 +734,9 @@ footer {
               <p class="flip-teaser">El sistema que construimos hoy, más valioso mañana.</p>
               <div class="flip-hint">descubrir</div>
             </div>
-            <div class="flip-back">
+            <div class="flip-back" data-num="paso 04">
               <p class="flip-blabel">Lo que hacemos</p>
-              <p class="flip-headline">Monitorizamos, ajustamos y expandimos el sistema a medida que tu empresa escala.</p>
+              <p class="flip-headline">Monitorizamos, ajustamos y expandimos el sistema conforme tu empresa escala.</p>
               <div class="flip-divider"></div>
               <p class="flip-desc">No es un proyecto cerrado. Es una relación continua orientada a ventaja competitiva real.</p>
             </div>
@@ -887,6 +908,23 @@ const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+// ── Mobile flip-backs: revelar en scroll en orden ─────────────────────────
+function initMobileFlipReveal() {
+  if (window.innerWidth > 560) return;
+  const backs = document.querySelectorAll('#metodo .flip-back');
+  const roMob = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('mob-visible');
+        roMob.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  backs.forEach(b => roMob.observe(b));
+}
+initMobileFlipReveal();
+window.addEventListener('resize', initMobileFlipReveal);
 
 // ── Progress bar ──────────────────────────────────────────────────────────
 const progressBar = document.getElementById('progress-bar');
