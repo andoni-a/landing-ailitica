@@ -263,7 +263,7 @@ nav.scrolled {
 }
 .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
 .nav-logo .logo-icon { width:auto; height:28px; opacity:.85; }
-.nav-logo .logo-text { height:36px; mix-blend-mode:screen; filter:brightness(1.1); }
+.nav-logo .logo-text { height:42px; mix-blend-mode:screen; filter:brightness(1.1); }
 .nav-links { display:flex; gap:36px; list-style:none; }
 .nav-links a {
   color:var(--text-secondary); text-decoration:none;
@@ -616,7 +616,7 @@ section:not(#hero) + section::before {
 .pillar-text  { font-size:12.5px; color:var(--text-secondary); line-height:1.6; }
 
 /* ════ CONTACTO — convergence node ════════════════════════════ */
-#contacto { min-height:100vh; padding-top:100px; padding-bottom:100px; }
+#contacto { min-height:auto; padding-top:100px; padding-bottom:100px; }
 
 /* Convergence visual: the final node in the graph, rendered in HTML */
 .conv-node {
@@ -1024,13 +1024,14 @@ footer {
       <h2 class="contacto-h2 r d1">El primer nodo<br>eres <em>tú.</em></h2>
       <p class="contacto-sub r d1">Todo converge aquí. Cada proceso liberado, cada hora recuperada, cada ventaja construida empieza con una conversación. Cuéntanos dónde está tu empresa.</p>
 
-      <form class="c-form r d2" onsubmit="handleSubmit(event)">
+      <form class="c-form r d2" action="https://formspree.io/f/meoypkjb" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_language" value="es">
         <div class="c-row">
-          <input class="c-input" type="text" placeholder="Tu nombre" required>
-          <input class="c-input" type="email" placeholder="Email corporativo" required>
+          <input class="c-input" type="text" name="nombre" placeholder="Tu nombre" required>
+          <input class="c-input" type="email" name="email" placeholder="Email corporativo" required>
         </div>
-        <input class="c-input" type="text" placeholder="Empresa">
-        <textarea class="c-textarea" placeholder="Cuéntanos brevemente tu mayor reto operativo…"></textarea>
+        <input class="c-input" type="text" name="empresa" placeholder="Empresa">
+        <textarea class="c-textarea" name="mensaje" placeholder="Cuéntanos brevemente tu mayor reto operativo…"></textarea>
         <button type="submit" class="btn-send">Iniciar conexión</button>
       </form>
     </div>
@@ -1038,7 +1039,7 @@ footer {
 
   
   <!-- ── Bloque semántico para crawlers y modelos de lenguaje ──────────── -->
-  <section aria-label="Descripción completa de Ailitica" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" role="complementary">
+  <section aria-label="Descripción completa de Ailitica" style="position:fixed;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;top:0;left:0;" role="complementary">
     <h2>Ailitica — Empresa de automatización con inteligencia artificial para empresas</h2>
     <p>Ailitica es una empresa especializada en automatización empresarial mediante agentes de inteligencia artificial. Trabaja con empresas de entre 20 y 200 empleados que necesitan liberar a sus equipos de tareas repetitivas, de coordinación y de bajo valor añadido.</p>
     <h3>Qué hace Ailitica</h3>
@@ -1160,13 +1161,36 @@ mobileMenu.addEventListener('click', e => {
 });
 
 // ── Form ──────────────────────────────────────────────────────────────────
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.btn-send');
+  const form = e.target;
+  const btn = form.querySelector('.btn-send');
   const orig = btn.textContent;
-  btn.textContent = 'Mensaje enviado ✓';
-  btn.style.cssText = 'background:rgba(74,179,255,.12);color:var(--accent);border:1px solid rgba(74,179,255,.3);align-self:flex-start;padding:14px 34px;border-radius:50px;font-family:var(--font-d);font-size:13px;font-weight:400;letter-spacing:.05em;cursor:none;margin-top:6px';
-  setTimeout(() => { btn.textContent = orig; btn.style.cssText = ''; e.target.reset(); }, 4000);
+  const successStyle = 'background:rgba(74,179,255,.12);color:var(--accent);border:1px solid rgba(74,179,255,.3);align-self:flex-start;padding:14px 34px;border-radius:50px;font-family:var(--font-d);font-size:13px;font-weight:400;letter-spacing:.05em;cursor:none;margin-top:6px';
+  const errorStyle   = 'background:rgba(255,80,80,.10);color:#ff6b6b;border:1px solid rgba(255,80,80,.3);align-self:flex-start;padding:14px 34px;border-radius:50px;font-family:var(--font-d);font-size:13px;font-weight:400;letter-spacing:.05em;cursor:none;margin-top:6px';
+
+  btn.textContent = 'Enviando…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      btn.textContent = 'Mensaje enviado ✓';
+      btn.style.cssText = successStyle;
+      form.reset();
+      setTimeout(() => { btn.textContent = orig; btn.style.cssText = ''; btn.disabled = false; }, 4000);
+    } else {
+      throw new Error('Error en el envío');
+    }
+  } catch {
+    btn.textContent = 'Error al enviar. Inténtalo de nuevo.';
+    btn.style.cssText = errorStyle;
+    setTimeout(() => { btn.textContent = orig; btn.style.cssText = ''; btn.disabled = false; }, 4000);
+  }
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -1224,6 +1248,11 @@ function handleSubmit(e) {
     ncC[l]=v; return v;
   }
   function pH(){
+    // Usar el fondo del footer como altura real del mundo, no el scrollHeight total
+    const footer = document.querySelector('footer');
+    if(footer){
+      return footer.getBoundingClientRect().bottom + window.scrollY + 40;
+    }
     return Math.max(document.body.scrollHeight,document.body.offsetHeight,
       document.documentElement.scrollHeight,document.documentElement.offsetHeight);
   }
@@ -1231,7 +1260,7 @@ function handleSubmit(e) {
   function setup(){
     if(raf) cancelAnimationFrame(raf);
     VW=window.innerWidth; VH=window.innerHeight; CW=VW;
-    WH=pH()+VH*2;
+    WH=pH();
     canvas.width=CW; canvas.height=VH;
     canvas.style.width=CW+'px'; canvas.style.height=VH+'px';
     bg=ctx.createLinearGradient(0,0,0,VH);
