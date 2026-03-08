@@ -248,12 +248,23 @@ section:not(#hero) + section::before {
   font-weight:300; line-height:1.25; letter-spacing:-.02em; margin-bottom:32px;
 }
 .manifesto-h2 strong { font-weight:400; color:var(--accent); }
-.manifesto-paras { display:flex; flex-direction:column; }
-.manifesto-paras p {
-  font-size:15px; line-height:1.82; color:var(--text-secondary);
-  padding:18px 0; border-bottom:1px solid var(--border-soft);
+.manifesto-paras { display:flex; flex-direction:column; gap:2px; }
+.manifesto-stat {
+  display:flex; flex-direction:column; gap:6px;
+  padding:22px 24px; border-radius:var(--radius-sm);
+  border:1px solid var(--border-soft); background:rgba(74,179,255,0.03);
+  transition:border-color .2s, background .2s;
 }
-.manifesto-paras p:last-child { border-bottom:none; padding-bottom:0; }
+.manifesto-stat:hover { border-color:var(--border); background:rgba(74,179,255,0.06); }
+.manifesto-stat-label {
+  font-family:var(--font-d); font-size:9px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--accent); opacity:.6;
+}
+.manifesto-stat-text {
+  font-size:clamp(15px,1.4vw,17px); font-weight:300;
+  color:var(--text-primary); line-height:1.5;
+}
+.manifesto-stat-text strong { color:var(--accent); font-weight:400; }
 
 /* ════ MÉTODO — flip grid ══════════════════════════════════════ */
 #metodo { min-height:auto; padding-top:100px; padding-bottom:100px; }
